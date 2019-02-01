@@ -1,0 +1,5 @@
+*.names
+build-easy_label-Desktop-Debug/
+*.user
+build/
+
