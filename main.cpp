@@ -379,7 +379,6 @@ int main(int argc, char *argv[])
                 // save current coords
                 if ((old_trackbar_value >= 0) && (delete_this_file == 0)) // && current_coord_vec.size() > 0) // Yolo v2 can processes background-image without objects
                 {
-		delete_this_file = 0;
                     try
                     {
                         std::string const jpg_filename = jpg_filenames[old_trackbar_value];
@@ -426,7 +425,7 @@ int main(int argc, char *argv[])
                     }
                     catch (...) { std::cout << " Exception when try to write txt-file \n"; }
                 }
-
+		delete_this_file = 0;
                 // show preview images
                 for (size_t i = 0; i < preview_number && (i + trackbar_value) < jpg_filenames_path.size(); ++i)
                 {
@@ -815,6 +814,24 @@ int main(int argc, char *argv[])
                     {
                         //itt=current_coord_vec.erase(itt);
                         (*itt).id=2;
+                        itt++;
+                    }
+
+                    else
+                        itt++;
+                }
+                break;
+            }
+            case 'f':
+            {
+                std::vector<coord_t>::iterator itt;
+                for (itt = current_coord_vec.begin(); itt != current_coord_vec.end();)
+                {
+                    if ((*itt).abs_rect.tl().x<x_show && (*itt).abs_rect.tl().y<y_show - 100
+                        && (*itt).abs_rect.br().x>x_show && (*itt).abs_rect.br().y>y_show - 100)
+                    {
+                        //itt=current_coord_vec.erase(itt);
+                        (*itt).id=3;
                         itt++;
                     }
 
